@@ -1,16 +1,93 @@
-# React + Vite
+# Sammakesplans Content Calendar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A content tracker for Samantha Provenza, Travel Designer. Built with Vite + React, deployed to GitHub Pages.
 
-Currently, two official plugins are available:
+**Live site:** https://samserif.github.io/sammakesplans-content-calendar/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🖥️ Starting a work session
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Every time you want to work on the project, open Terminal and run:
 
-## Expanding the ESLint configuration
+```bash
+cd ~/claude/projects/sammakesplans-content-calendar
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This starts a local preview at **http://localhost:5173** — you can see changes live as you make them.
+
+---
+
+## 💬 Working with Claude
+
+Open Claude and say things like:
+- *"Add a new platform called TikTok with color #000000"*
+- *"Add a search bar to filter by keyword"*
+- *"Change the header color to navy"*
+- *"Add a way to export the calendar as CSV"*
+
+Claude will edit the files directly. You'll see changes instantly in your browser at localhost:5173.
+
+---
+
+## 🚀 Deploying changes to your live site
+
+Once you're happy with changes, run these 3 commands:
+
+```bash
+cd ~/claude/projects/sammakesplans-content-calendar
+git add .
+git commit -m "describe what you changed"
+git push
+```
+
+GitHub Actions will automatically rebuild and deploy. Live site updates in about **60 seconds**.
+
+---
+
+## 📋 Typical day-to-day example
+
+1. Open Terminal → `npm run dev`
+2. Open Claude → *"Update the August 20 Substack post script with this copy: ..."*
+3. Check localhost:5173 to confirm it looks right
+4. `git add . && git commit -m "Update August Substack copy" && git push`
+5. Done — live in 60 seconds
+
+---
+
+## 🔄 If you work on a different Mac or need to start fresh
+
+```bash
+git clone git@github.com:samserif/sammakesplans-content-calendar.git
+cd sammakesplans-content-calendar
+npm install
+npm run dev
+```
+
+---
+
+## ⚠️ One thing to know about data
+
+Content edits made **on the live site** (status changes, new posts) are saved in that browser's localStorage only — they don't sync back to the code.
+
+Treat the seed data in `src/data/seed.js` as your source of truth. When you want a change to be permanent, ask Claude to update that file, then push.
+
+---
+
+## 📁 Project structure
+
+```
+src/
+  App.jsx              # Main app, state, layout
+  data/
+    constants.js       # Brand colors, platforms, themes, statuses
+    seed.js            # All content items
+  components/
+    CalendarView.jsx   # Monthly calendar grid
+    BoardView.jsx      # Kanban board by status
+    DetailPanel.jsx    # Side panel for viewing a post
+    EditModal.jsx      # Modal for adding/editing a post
+  hooks/
+    useStorage.js      # localStorage wrapper (swap for Supabase here later)
+```
